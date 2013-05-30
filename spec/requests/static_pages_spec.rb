@@ -11,7 +11,7 @@ describe "Static pages" do
     puts "Test on the Home page passed successfully"
   end
 
-   describe "Help page" do
+  describe "Help page" do
     before { visit help_path }
     it { should have_selector('h1', text: 'Help') }
     it { should have_selector('title', text: full_title('Help')) }
@@ -31,12 +31,22 @@ describe "Static pages" do
     it { should have_selector('title', text: full_title('Contact')) }
     puts "Test on the Contact page passed successfully"
   end
-  
-#    Should_not have Title Home
-#    it "'Home'" do
-#      visit '/pages/home'
-#      page.should_not have_selector('title', :text => '| Home')
-#      puts "Test passed successfully"
-#    end
+
+  it "Should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    page.should have_selector 'title', text: full_title('About Us')
+    click_link "Help"
+    page.should
+    click_link "Contact"
+    page.should
+    click_link "Home"
+    page.should
+    click_link "Sign up"
+    page.should
+    click_link "sample app"
+    page.should
+    puts "A test for the links on the layout passed successfully"
+  end
 
 end
