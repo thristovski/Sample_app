@@ -6,7 +6,7 @@ describe "Static pages" do
 
   describe "Home" do
     before { visit root_path }
-    it { should have_selector('title', :text =>/\bRuby on Rails Tutorial Sample App\s\W\s\b#{@title}/) }
+    it { should have_selector('title', text: full_title('')) }
     it { should have_selector('h1', :text => 'Home') }
     puts "Test on the Home page passed successfully"
   end
