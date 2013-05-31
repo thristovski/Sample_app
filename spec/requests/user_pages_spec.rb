@@ -9,6 +9,6 @@ describe "User pages" do
 
     it { should have_selector('h1', text: 'Sign up') }
     it { should have_selector('title', text: full_title('Sign up')) }
-    puts "Test on the Signup page passed successfully"
+    puts "Validation passed successfully"
   end
 end
