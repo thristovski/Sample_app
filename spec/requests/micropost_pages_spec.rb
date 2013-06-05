@@ -39,6 +39,7 @@ describe "Micropost pages" do
         it "should delete a micropost" do
           expect { click_link "delete" }.to change(Micropost, :count).by(-1)
         end
-     end
- end
+       end
+    end
+  end
 end
