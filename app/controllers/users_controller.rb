@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user, only: :destroy
+  
   def index
     @title = "Home page"
     @users = 8
@@ -57,15 +58,17 @@ class UsersController < ApplicationController
 
   def following
     @title = "Following"
+    @Following = 8
     @user = User.find(params[:id])
-    @users = @user.followed_users.paginate(page: params[:page])
+    @users = @user.followed_users.paginate(page: params[:page], :per_page => @Following)
     render 'show_follow'
   end
 
   def followers
     @title = "Followers"
+    @Followers = 8
     @user = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
+    @users = @user.followers.paginate(page: params[:page], :per_page => @Followers)
     render 'show_follow'
   end
 
