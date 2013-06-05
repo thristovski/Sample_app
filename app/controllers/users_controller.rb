@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def index
     @title = "Home page"
-    @users = 5
+    @users = 8
     @users = User.paginate(page: params[:page], :per_page => @users)
   end
 
