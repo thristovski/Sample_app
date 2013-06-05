@@ -1,10 +1,19 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
-  before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user, only: :destroy
+  
   def index
+    @title = "Home page"
     @users = 5
     @users = User.paginate(page: params[:page], :per_page => @users)
+  end
+
+  def show
+    @title = "Show mircoposts"
+    @show_microposts = 10
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page], :per_page => @show_microposts)
   end
 
   def new
@@ -12,12 +21,8 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show
-    @user = User.find(params[:id])
-    @title = User.find(params[:id]).name
-  end
-
   def create
+    @title = "Create user"
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
@@ -34,6 +39,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @title = "Update user"
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
       sign_in @user
@@ -44,6 +50,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @title = "Destroy user"
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_url
